@@ -25,6 +25,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
@@ -52,35 +56,59 @@
       background-color: var(--button-hover-bg);
     }
 
+    .dark-mode-toggle.icon-style {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
     #tituloContainer {
       position: fixed;
-      top: 2rem;
+      top: 0;
       width: 100%;
       text-align: center;
       z-index: 10;
-      transition: opacity 1s ease;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 4rem 1rem 2rem;
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 12px 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: padding 0.3s ease;
     }
 
-    #tituloContainer.fade-out {
-      opacity: 0;
+    body.dark-mode #tituloContainer {
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
     .titulo-central {
-      font-size: 2.5rem;
-      font-weight: 500;
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      transition: transform 0.2s ease, font-size 0.3s ease;
     }
 
     .subtitulo {
-      margin-top: 0.8rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 300;
       color: var(--text-color);
+      opacity: 1;
+      transition: opacity 0.3s ease;
     }
 
     main {
       max-width: 1000px;
       width: 100%;
-      margin: 10.5rem auto 0;
+      margin: 12rem auto 0;
       text-align: center;
     }
 
@@ -99,11 +127,21 @@
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.8s ease, box-shadow 0.8s ease, border 0.3s ease;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: none;
+    }
+
+    body.dark-mode .item-galeria {
+      border: 1px solid transparent;
+    }
+
+    body.dark-mode .item-galeria:hover {
+      box-shadow: 0 0 2px #cc33ff;
+      border: 1px solid #cc33ff;
     }
 
     .item-galeria .img-estatica,
@@ -141,7 +179,13 @@
       font-weight: bold;
       text-align: center;
       z-index: 2;
-      transition: all 0.4s ease;
+      transition: all 0.9s ease, color 0.3s ease, background-color 0.3s ease;
+      color: #111;
+    }
+
+    body.dark-mode .titulo-img {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fdfdfd;
     }
 
     .item-galeria:hover .titulo-img,
@@ -183,16 +227,6 @@
       object-fit: cover;
     }
 
-    .imagem-checkpoint {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1px;
-      height: 1px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
     .contato-links {
       display: flex;
       justify-content: center;
@@ -231,11 +265,43 @@
       text-align: center;
     }
 
+    @media (max-width: 768px) {
+      .titulo-central {
+        font-size: 2.5rem;
+      }
+
+      .subtitulo {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+      }
+
+      .imagem-cheia-wrapper {
+        height: 60vh;
+        margin-top: 3rem;
+      }
+
+      .contato-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .link-box {
+        width: 90%;
+      }
+    }
+
     @media (max-width: 500px) {
       .item-galeria {
         width: 100%;
         max-width: 280px;
         height: 400px;
+      }
+
+      .dark-mode-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        right: 0.5rem;
+        top: 0.5rem;
       }
     }
   </style>
@@ -251,30 +317,29 @@
   <main>
     <section class="galeria">
       <div class="item-galeria">
-        <div class="titulo-img">Projeto 1</div>
-        <img class="img-estatica" src="sa4.jpeg" alt="Projeto 1 - imagem estática" />
-        <img class="img-gif" src="to5.gif" alt="Projeto 1 - gif" />
+        <div class="titulo-img">Marketing Visual</div>
+        <img class="img-estatica" src="re1.webp" alt="Identidade visual criativa" />
+        <img class="img-gif" src="to5.gif" alt="Animação de identidade visual" />
         <div class="overlay-texto">Criação de identidade visual e logotipo exclusivo.</div>
       </div>
 
       <div class="item-galeria">
-        <div class="titulo-img">Projeto 2</div>
-        <img class="img-estatica" src="sa3.jpg" alt="Projeto 2 - imagem estática" />
-        <img class="img-gif" src="to3.gif" alt="Projeto 2 - gif" />
+        <div class="titulo-img">Soluções Digitais</div>
+        <img class="img-estatica" src="re4.webp" alt="Layout para redes sociais" />
+        <img class="img-gif" src="to3.gif" alt="Animação layout redes sociais" />
         <div class="overlay-texto">Layout moderno para redes sociais com foco em branding.</div>
       </div>
 
       <div class="item-galeria">
-        <div class="titulo-img">Projeto 3</div>
-        <img class="img-estatica" src="sa2.png" alt="Projeto 3 - imagem estática" />
-        <img class="img-gif" src="to6.gif" alt="Projeto 3 - gif" />
+        <div class="titulo-img">Ilustração Digital</div>
+        <img class="img-estatica" src="re3.webp" alt="Website responsivo" />
+        <img class="img-gif" src="to6.gif" alt="Animação de website responsivo" />
         <div class="overlay-texto">Website responsivo e otimizado para performance.</div>
       </div>
     </section>
 
     <div class="imagem-cheia-wrapper">
-      <img class="imagem-cheia" src="sa.png" alt="Imagem de fundo preenchendo a tela" />
-      <div class="imagem-checkpoint" id="imagemCheckpoint"></div>
+      <img class="imagem-cheia" src="sa.webp" alt="Imagem de fundo preenchendo a tela" />
     </div>
 
     <div class="contato-links">
@@ -286,45 +351,98 @@
   <footer>&copy; 2025 digitalUP</footer>
 
   <script>
-    // Tema escuro persistente
+    const toggleButton = document.querySelector('.dark-mode-toggle');
+
     if (localStorage.getItem('dark-mode') === 'enabled') {
       document.body.classList.add('dark-mode');
     }
 
     function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('dark-mode',
-        document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('dark-mode', isDark ? 'enabled' : 'disabled');
+      applyToggleButtonStyle();
     }
 
+    function applyToggleButtonStyle() {
+      if (window.innerWidth <= 768) {
+        toggleButton.classList.add('icon-style');
+        toggleButton.textContent = document.body.classList.contains('dark-mode') ? '☀' : '☾';
+      } else {
+        toggleButton.classList.remove('icon-style');
+        toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Escuro';
+      }
+    }
+
+    window.addEventListener('resize', applyToggleButtonStyle);
+    applyToggleButtonStyle();
+
+    const tituloCentral = document.querySelector('.titulo-central');
     const tituloContainer = document.getElementById('tituloContainer');
-    const imagemCheckpoint = document.getElementById('imagemCheckpoint');
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            tituloContainer.classList.add('fade-out');
-          } else {
-            tituloContainer.classList.remove('fade-out');
-          }
-        });
-      },
-      { root: null, threshold: 1.0 }
-    );
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const fadeStart = 100;
+      const fadeEnd = 300;
 
-    if (imagemCheckpoint) {
-      observer.observe(imagemCheckpoint);
+      const subtituloAtual = document.querySelector('.subtitulo');
+
+      if (scrollY < fadeStart) {
+        if (!subtituloAtual) {
+          const p = document.createElement('p');
+          p.className = 'subtitulo';
+          p.textContent = 'Soluções criativas e modernas para suas ideias inovadoras.';
+          tituloContainer.appendChild(p);
+        } else {
+          subtituloAtual.style.opacity = '1';
+        }
+      } else if (scrollY > fadeEnd) {
+        if (subtituloAtual) {
+          subtituloAtual.remove();
+        }
+      } else {
+        if (subtituloAtual) {
+          const progress = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+          subtituloAtual.style.opacity = progress.toString();
+        }
+      }
+
+      const paddingTop = Math.max(0.5, 4 - scrollY / 50);
+      const paddingBottom = Math.max(0.3, 2 - scrollY / 100);
+      tituloContainer.style.paddingTop = `${paddingTop}rem`;
+      tituloContainer.style.paddingBottom = `${paddingBottom}rem`;
+
+      const fontSizeStart = 3.5;
+      const fontSizeEnd = 2.5;
+      const scaleStart = 0;
+      const scaleEnd = 300;
+      const progress = Math.min(1, Math.max(0, (scrollY - scaleStart) / (scaleEnd - scaleStart)));
+      const currentFontSize = fontSizeStart - progress * (fontSizeStart - fontSizeEnd);
+      tituloCentral.style.fontSize = `${currentFontSize}rem`;
+
+      requestAnimationFrame(handleScroll);
     }
 
-    // Suporte a toque para ativar hover
+    requestAnimationFrame(handleScroll);
+
+    // Touch support para clique/tap
+    let touchStartY = 0;
+    let touchEndY = 0;
+
     document.querySelectorAll('.item-galeria').forEach(item => {
-      item.addEventListener('touchstart', () => {
-        item.classList.add('touch-active');
-        setTimeout(() => item.classList.remove('touch-active'), 3000);
+      item.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      item.addEventListener('touchend', (e) => {
+        touchEndY = e.changedTouches[0].clientY;
+        const distance = Math.abs(touchEndY - touchStartY);
+        if (distance < 10) {
+          const isActive = item.classList.contains('touch-active');
+          document.querySelectorAll('.item-galeria').forEach(i => i.classList.remove('touch-active'));
+          if (!isActive) item.classList.add('touch-active');
+        }
       });
     });
   </script>
 </body>
 </html>
-
